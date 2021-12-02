@@ -1,9 +1,9 @@
 Package: Projet 
-Title: Shiny Visualisation Bayesien
+Title: Bayesian Shiny Visualisation 
 Version: 0.0.0.9000
 Authors@R: 
     person("First", "Last", , "first.last@example.com", role = c("aut", "cre"))
-Description: Utilisation de Shiny pour visualiser les résultats d'une simulation bayésienne organisée par paramètres
+Description: Bayesian trace plots choosing different parameters with Shiny and easy focus on non convergent parameters
 License: MIT + file LICENSE
 ByteCompile: true
 Encoding: UTF-8
