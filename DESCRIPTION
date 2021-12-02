@@ -1,9 +1,9 @@
-Package: Projet
-Title: What the Package Does (One Line, Title Case)
+Package: Projet 
+Title: Shiny Visualisation Bayesien
 Version: 0.0.0.9000
 Authors@R: 
     person("First", "Last", , "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Description: Utilisation de Shiny pour visualiser les résultats d'une simulation bayésienne organisée par paramètres
 License: MIT + file LICENSE
 ByteCompile: true
 Encoding: UTF-8
