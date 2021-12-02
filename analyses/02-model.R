@@ -2,7 +2,7 @@
 
 
 #### Write model ----
-
+set.seed(442)
 cat("
     model {
    for (i in 1:N)  {
@@ -37,7 +37,7 @@ mydata <- list(elev = elev,
 # list of inits
 
 inits <- list(mu = runif(1,-10,10),
-              beta = rnorm(3, mu = 0.01, sd = 0.01),
+              beta = rnorm(3, mean = 0.01, sd = 0.01),
               mubeta = runif(1, -10, 10),
               taubeta = runif(1, 0, 100),
               taumu = runif(1, 0, 100))
@@ -50,16 +50,16 @@ parameters <- c("beta[1]", "beta[2]", "beta[3]", "mu", "taumu", "taubeta")
 start <- as.POSIXlt(Sys.time())
 
 jmodel <- rjags::jags.model(here::here("analyses", "model.txt"),
-                            data=mydata,
-                            inits,
+                            data = mydata,
+                            inits = inits,
                             n.chains = 3,
                             n.adapt = 200)
 
-update(jmodel, n.iter=1000)
+update(jmodel, n.iter=10)
 
 jsample <- rjags::coda.samples(jmodel,
                                parameters,
-                               n.iter=2000,
+                               n.iter=200,
                                thin = 5)
 end <- as.POSIXlt(Sys.time())
 duration <- end-start
@@ -68,7 +68,7 @@ duration
 
 #### Save outputs ----
 
-save(jsample,
-     jmodel,
-     duration,
-     file=here::here("outputs", 'model_output.Rdata'))
+#save(jsample,
+#     jmodel,
+#     duration,
+#     file=here::here("outputs", 'model_output.Rdata'))
