@@ -8,6 +8,7 @@
 # Shiny interface building
 #### --------------------------------------------- ####
 
+library(shiny)
 
 #### VISUALS ####
 
@@ -35,11 +36,13 @@ ui<-fluidPage(titlePanel("Trace Plot visualisation depending on parameter select
 #### SERVER ####
 
 server <-function(input,output){
-  parameter_names <- c("parameter alpha", "parameter beta 1","parameter beta 2","parameter beta 3","parameter mu","paramter sigma")
+  parameter_names <- c("parameter alpha", "parameter beta 1","parameter beta 2","parameter beta 3","parameter mu","parameter sigma")
   i <- reactive({as.character(input$nb1)}) # i implementation attribu i à choices ici nb1
   output$plot= renderPlot({
-  plot(1:10,1:10,main=paste("Parameter",parameter_names[i()]))
+  plot(1:10,1:10)
   })
 }
+
+#### CALL SHINY APP ####
 
 shinyApp(ui,server)
