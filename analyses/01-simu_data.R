@@ -1,6 +1,6 @@
 
 
-
+set.seed(78)
 ###### Create occupancy probabilities
 elev <- seq(0,2000,50)
 p_occ1 <- simu_occu(alpha = 0.01, beta = 0.001, elev = elev)$p_occu
