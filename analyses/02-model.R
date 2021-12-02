@@ -37,7 +37,7 @@ mydata <- list(elev = elev,
 # list of inits
 
 inits <- list(mu = runif(1,-10,10),
-              beta = rnorm(3, mu = 0.01, sd = 0.01),
+              beta = rnorm(3, 0.01, sd = 0.01),
               mubeta = runif(1, -10, 10),
               taubeta = runif(1, 0, 100),
               taumu = runif(1, 0, 100))
