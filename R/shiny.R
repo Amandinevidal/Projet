@@ -14,32 +14,31 @@ library(shiny)
 
 ui<-fluidPage(titlePanel("Trace Plot visualisation depending on parameter selection"),
 
-              sidebarPanel( # ce que t'as sur les côtés
-                fileInput(inputId = "outputs",
-                          label = "Upload model outputs",
-                          accept = c(".RData")), # extension attendue
+              sidebarPanel( # add web site options on side
+                fileInput(inputId = "output", # name of file to import (used next in server function)
+                          label = "Upload model outputs", # name of the option
+                          accept = c(".RData")), # output extension expected
 
-                selectInput(inputId = "nb1", # spécifier ce qu'il y a sur le cote # prduit un menu deroulant # arg graphes
-                            h3("Which parameter ?"), # titre
-                            choices = list("parameter alpha"=1, "parameter beta 1"=2,"parameter beta 2"=3,"parameter beta 3"=4,"parameter mu"=5,"paramter sigma"=6), # parameter name
-                            selected = 1)), # valeur par default
+                selectInput(inputId = "nb1", # name of input for parameter choice (used next in server function)
+                            h3("Which parameter ?"), # title for selection
+                            choices = list("parameter alpha"=1, "parameter beta 1"=2,"parameter beta 2"=3,"parameter beta 3"=4,"parameter mu"=5,"paramter sigma"=6), # parameter names
+                            selected = 1)), # default value
 
-              mainPanel( # page princp
-                h2("Trace plot"),
-                plotOutput(outputId = "plot"),
-                br(),
-                br()
+              mainPanel( # page setup
+                h2("Trace plot"), # title
+                plotOutput(outputId = "plot"), # plot
+                br(), # empty line
+                br() # empty line
               )
 )
 
 
-#### SERVER ####
+#### SERVER FUNCTION ####
 
 server <-function(input,output){
-  parameter_names <- c("parameter alpha", "parameter beta 1","parameter beta 2","parameter beta 3","parameter mu","parameter sigma")
-  i <- reactive({as.character(input$nb1)}) # i implementation attribu i à choices ici nb1
-  output$plot= renderPlot({
-  plot(1:10,1:10)
+  i <- reactive({as.character(input$nb1)}) # i take one parameter value corresponding to selectInput choices l24
+  output$plot= renderPlot({ # type of element to add in shiny
+    plot(1:10,1:10) # plot
   })
 }
 
