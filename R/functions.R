@@ -13,7 +13,7 @@
 #'
 #' @param alpha # intercept
 #' @param beta # linear coefficient
-#' @param J # number of sites
+#' @param elev # specify elevations
 #'
 #' @return
 #' @export
@@ -21,7 +21,7 @@
 #' @examples
 simu_occu <- function(alpha = 0.01, beta = 0.002, elev = seq(0, 2000, 50)) {
 
-  Lpoc <- alpha + beta*elev  + rnorm(length(elev), 0, 0.7) # create occupancy vector
+  Lpoc <- alpha + beta*elev  + rnorm(length(elev), 0, 0.5) # create occupancy vector
   p_occu <- exp(Lpoc) / (1 + exp(Lpoc)) #
   return(list("elev" = elev, "p_occu" = p_occu))
 
