@@ -5,6 +5,7 @@
 # Encoding : UTF-8
 # file : make.R
 
+<<<<<<< HEAD
 # Main script
 #### --------------------------------------------- ####
 
@@ -14,3 +15,7 @@ library(shiny)
 #### Data simulations ####
 #### Model ####
 #### Create Output ####
+=======
+# Compile other scripts of the project
+#### --------------------------------------------- ####
+>>>>>>> 252d151a0e904d20ca7d6cf319f70228e1603c16
