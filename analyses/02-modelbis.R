@@ -64,9 +64,9 @@ jmodelbis <- rjags::jags.model(here::here("analyses", "modelbis.txt"),
                             data = mydata,
                             inits = inits,
                             n.chains = 3,
-                            n.adapt = 200)
+                            n.adapt = 80)
 
-update(jmodelbis, n.iter=10)
+update(jmodelbis, n.iter=1)
 
 jsample <- rjags::coda.samples(jmodelbis,
                                parameters,
