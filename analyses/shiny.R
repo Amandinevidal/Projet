@@ -8,12 +8,12 @@
 # Shiny interface building
 #### --------------------------------------------- ####
 
-#library(shiny)
+library(shiny)
 
 
 #### VISUALS ####
 
-ui <- fluidPage(titlePanel("Trace Plot visualisation depending on parameter selection"),
+ui <- fluidPage(titlePanel("Visu Bayes: parameters convergence check"),
 
               sidebarPanel( # add web site options on side
                 fileInput(inputId = "output1", # name of file to import (mcmc table) not load just named
@@ -25,7 +25,7 @@ ui <- fluidPage(titlePanel("Trace Plot visualisation depending on parameter sele
                 br(),
                 h2("Parameters summary"),
                 br(),
-                tableOutput("table"),
+                DT::dataTableOutput("table"),
               ),
               mainPanel( # page setup
                 h2("Trace plot"), # title
@@ -65,15 +65,18 @@ server <- function(input,output){
 
   ## print summary table
   summarytable <- reactive({
-    MCMCvis::MCMCsummary(filedata())
+    MCMCvis::MCMCsummary(filedata())|>dplyr::mutate_all(function(x)round(x,1))|>dplyr::select(-7)
   })
-  output$table <- renderTable({
+  output$table <- DT::renderDataTable({
     if(is.null(input$output1)) {
       return(paste(" ")) # at the moment there is no file
     } else {
-      summarytable()
+      summarydata <- MCMCvis::MCMCsummary(filedata())|>dplyr::mutate_all(function(x)round(x,1))|>dplyr::select(-7)
+      print(summarydata)
+      summarydata <- as.data.frame(summarydata)
+      DT::datatable(summarydata) |> DT::formatStyle(ncol(summarydata),target = "row", backgroundColor = DT::styleEqual(which(summarydata$Rhat >= 1.1)[1], "red"))
     }
-  },rownames = T)
+  })
 
   ## plot (output2) with reactive title to selected parameter (output1)
   i <- reactive({as.character(input$param2)}) # i take one parameter value corresponding to selectInput choices l24 #
@@ -116,4 +119,4 @@ server <- function(input,output){
 
 #### CALL SHINY APP ####
 
-#shinyApp(ui,server)
+shinyApp(ui,server)
