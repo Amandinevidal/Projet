@@ -18,15 +18,18 @@ ui<-fluidPage(titlePanel("Trace Plot visualisation depending on parameter select
                 fileInput(inputId = "output1", # name of file to import (mcmc table) not load just named
                           label = "Upload model mcmc output", # name of the option
                           accept = c(".RData")), # output extension expected
-                uiOutput("param")
-                # ajouter un menu deroulant parametre qui convergent
-                # un menu deroulant parametre qui ont pas converger
+                uiOutput("param"),
+                # add text advert to know which parameter does not converge
+                uiOutput(outputId = "warning")
               ),
               mainPanel( # page setup
                 h2("Trace plot"), # title
-                plotOutput(outputId = "plot"), # plot
+                plotOutput(outputId = "plot"), # trace plot
                 br(), # empty line
-                br(),# empty line
+                h2("Density posterior for each chains"),
+                plotOutput(outputId = "plot2"),
+                br(), # empty line
+                br()# empty line
               )
 )
 
@@ -55,8 +58,41 @@ server <-function(input,output){
   ## plot (output2) with reactive title to selected parameter (output1)
   i <- reactive({as.character(input$param2)}) # i take one parameter value corresponding to selectInput choices l24 #
   output$plot= renderPlot({ # type of element to add in shiny
-    load(input$output1$datapath,verbose = T) # take output and read it in file1
-    bayesplot::mcmc_trace(jsample,pars=i()) # plot
+    if(is.null(input$output1)) {
+      return(paste(" ")) # at the moment there is no file
+    } else {
+      load(input$output1$datapath,verbose = T) # take output and read it in file1
+      bayesplot::mcmc_trace(jsample,pars=i()) # trace plot
+    }
+  })
+
+  ## plot (output2) with reactive title to selected parameter (output1)
+  output$plot2= renderPlot({ # type of element to add in shiny
+    if(is.null(input$output1)) {
+      return(paste(" ")) # at the moment there is no file
+    } else {
+      load(input$output1$datapath,verbose = T) # take output and read it in file1
+      bayesplot::mcmc_dens_chains(jsample,pars=i()) # density posterior for each chains
+    }
+  })
+
+  output$warning <- renderUI({
+    if(is.null(input$output1)) {
+      return(paste(" ")) # at the moment there is no file
+    } else {
+      load(input$output1$datapath,verbose = T) # take output and read it in file1
+      results2 <- MCMCvis::MCMCsummary(jsample)
+      results2nc <- results2[results2$Rhat>1.1,]
+      if (is.null(rownames(results2[results2$Rhat>1.1,]))) {
+        HTML(
+          paste("All parameters reached convergence")
+        )
+      } else {
+        HTML(
+          paste("Non convergent parameters :\n",rownames(results2nc),sep="")
+        )
+      }
+    }
   })
 
 }
