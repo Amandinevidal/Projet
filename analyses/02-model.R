@@ -68,7 +68,5 @@ duration
 
 #### Save outputs ----
 
-#save(jsample,
-#     jmodel,
-#     duration,
-#     file=here::here("outputs", 'model_output.Rdata'))
+save(jsample,
+     file=here::here("Outputs", 'model_output.Rdata'))
