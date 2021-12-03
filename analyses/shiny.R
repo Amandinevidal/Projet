@@ -13,7 +13,7 @@ library(shiny)
 
 #### VISUALS ####
 
-ui <- fluidPage(titlePanel("Visu Bayes: parameters convergence check"),
+ui <- fluidPage(titlePanel("VisuBayes: parameters convergence check"),
 
                 sidebarPanel( # add web site options on side
                   fileInput(inputId = "output1", # name of file to import (mcmc table) not load just named
@@ -21,9 +21,11 @@ ui <- fluidPage(titlePanel("Visu Bayes: parameters convergence check"),
                             accept = c(".RData")), # output extension expected
                   uiOutput("param"),
                   # add text advert to know which parameter does not converge
-                  uiOutput(outputId = "warning"),
-                  br(),
+                  #uiOutput(outputId = "warning"),
+                  #br(),
                   h2("Parameters summary"),
+                  br(),
+                  p("Red lines indicate parameters that did not converge.", style="color:red"),
                   br(),
                   DT::dataTableOutput("table"),
                 ),
