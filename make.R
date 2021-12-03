@@ -25,6 +25,6 @@ source(here::here("analyses/02-modelbis.R"))
 
 #### Shiny ####
 library(shiny)
-source(here::here("analyses/shiny.R"))
+source(here::here("analyses/app.R"))
 
 shinyApp(ui,server)
