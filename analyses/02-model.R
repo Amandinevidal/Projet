@@ -18,7 +18,7 @@ cat("
 
         for (j in 1:S) {
           y[i, j] ~ dbern(p[i,j])
-          logit(p[i, j]) <- mu + beta[j]*elev[i]
+          p[i, j] <- exp(mu + beta[j]*elev[i]) / (1 + exp(mu + beta[j]*elev[i]))
         }
 
       }
