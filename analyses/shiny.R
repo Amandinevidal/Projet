@@ -8,12 +8,12 @@
 # Shiny interface building
 #### --------------------------------------------- ####
 
-library(shiny)
+#library(shiny)
 
 
 #### VISUALS ####
 
-ui<-fluidPage(titlePanel("Trace Plot visualisation depending on parameter selection"),
+ui <- fluidPage(titlePanel("Trace Plot visualisation depending on parameter selection"),
 
               sidebarPanel( # add web site options on side
                 fileInput(inputId = "output1", # name of file to import (mcmc table) not load just named
@@ -41,7 +41,7 @@ ui<-fluidPage(titlePanel("Trace Plot visualisation depending on parameter select
 
 #### SERVER FUNCTION ####
 
-server <-function(input,output){
+server <- function(input,output){
 
   ## load data
   filedata <- reactive({
@@ -116,4 +116,4 @@ server <-function(input,output){
 
 #### CALL SHINY APP ####
 
-shinyApp(ui,server)
+#shinyApp(ui,server)
