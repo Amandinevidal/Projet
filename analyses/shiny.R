@@ -13,7 +13,7 @@ library(shiny)
 
 #### VISUALS ####
 
-ui <- fluidPage(titlePanel("Visu Bayes: parameters convergence check"),
+ui <- fluidPage(titlePanel("VisuBayes: parameters convergence check"),
 
                 sidebarPanel( # add web site options on side
                   fileInput(inputId = "output1", # name of file to import (mcmc table) not load just named
@@ -21,9 +21,11 @@ ui <- fluidPage(titlePanel("Visu Bayes: parameters convergence check"),
                             accept = c(".RData")), # output extension expected
                   uiOutput("param"),
                   # add text advert to know which parameter does not converge
-                  uiOutput(outputId = "warning"),
-                  br(),
+                  #uiOutput(outputId = "warning"),
+                  #br(),
                   h2("Parameters summary"),
+                  br(),
+                  p("Red lines indicate parameters that did not converge.", style="color:red"),
                   br(),
                   DT::dataTableOutput("table"),
                 ),
@@ -31,7 +33,7 @@ ui <- fluidPage(titlePanel("Visu Bayes: parameters convergence check"),
                   h2("Trace plot"), # title
                   plotOutput(outputId = "plot",width = "100%", height = "300px"), # trace plot
                   br(), # empty line
-                  h2("Density posterior for each chains"),
+                  h2("Density posterior for each chain"),
                   plotOutput(outputId = "plot2",width = "100%", height = "300px"),
                   br(), # empty line
                   br()# empty line
@@ -64,17 +66,17 @@ server <- function(input,output){
   })
 
   ## print summary table
-    summarytable <- reactive({
-      MCMCvis::MCMCsummary(filedata())|>dplyr::mutate_all(function(x)round(x,1))|>dplyr::select(-7)
-    })
-    output$table <- DT::renderDataTable({
-      if(is.null(input$output1)) {
-        DT::datatable(matrix(0,ncol=3,nrow=3))
-      } else {
-      summarydata <- MCMCvis::MCMCsummary(filedata())|>dplyr::mutate_all(function(x)round(x,1))|>dplyr::select(-7)
-      DT::datatable(as.data.frame(summarydata)) |> DT::formatStyle(ncol(summarydata),target = "row", backgroundColor = DT::styleEqual(which(summarydata$Rhat >= 1.1)[1], "red"))
-      }
-    })
+  summarytable <- reactive({
+    MCMCvis::MCMCsummary(filedata())|>dplyr::mutate_all(function(x)round(x,1))|>dplyr::select(-7)
+  })
+  output$table <- DT::renderDataTable({
+    if(is.null(input$output1)) {
+      DT::datatable(matrix(0,ncol=3,nrow=3))
+    } else {
+      summarydata <- MCMCvis::MCMCsummary(filedata())|>dplyr::mutate_all(function(x)round(x,2))|>dplyr::select(-7)
+      DT::datatable(as.data.frame(summarydata)) |> DT::formatStyle('Rhat',target = "row", backgroundColor = DT::styleInterval(c(0,1.09,Inf), c('white','white','red','red')))
+    }
+  })
 
   ## plot (output2) with reactive title to selected parameter (output1)
   i <- reactive({as.character(input$param2)}) # i take one parameter value corresponding to selectInput choices l24 #
