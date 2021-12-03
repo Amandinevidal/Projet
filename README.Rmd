@@ -1,5 +1,6 @@
 ---
 output: github_document
+authors: Emmanuelle, Bastien, Amandine
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -22,7 +23,7 @@ This repository contains the data and code for a great shinyapp to visualise cha
 
 Please cite this compendium as:
 
-> Authors, (`r format(Sys.Date(), "%Y")`). _Compendium of R code and data for `r Title`_. Accessed `r format(Sys.Date(), "%d %b %Y")`. Online at <https://doi.org/xxx/xxx>
+> Emmanuelle Cam, Bastien Mourguiart and Amandine Vidal, (`r format(Sys.Date(), "%Y")`). _Compendium of R code and data for `r Title`_. Accessed `r format(Sys.Date(), "%d %b %Y")`. Online at <https://doi.org/xxx/xxx>
 
 ## Contents
 
@@ -46,7 +47,7 @@ You can download the compendium as a zip from from this URL:
 - open the `.Rproj` file in RStudio
 - run `devtools::install()` to ensure you have the packages this analysis depends on (also listed in the
 [DESCRIPTION](/DESCRIPTION) file).
-- finally, open `analysis/paper/paper.Rmd` and knit to produce the `paper.docx`, or run `rmarkdown::render("analysis/paper/paper.Rmd")` in the R console
+- finally, open `analyses/shiny.R` and source it to view the shinyapp.
 
 ### Licenses
 
