@@ -1,19 +1,23 @@
 
     model {
-   for (i in 1:N)  {
-     for (j in 1:S){
-        y[i,j]~dbern(p[i,j])
-        p[i,j]<-exp(mu+beta[j]*elev[i])/(1+exp(mu+beta[j]*elev[i]))
-     }
-    }
-    #priors
-    mu~dnorm(0, taumu)
-    taumu~dgamma(0.1,0.1)
-    taubeta~dgamma(0.1,0.1)
-    mubeta~dnorm(0, 1.0E-06)
 
-    for (j in 1:S){
-      beta[j]~dnorm(mubeta,taubeta)
-    }
+      for (i in 1:N)  {
+
+        for (j in 1:S) {
+          y[i, j] ~ dbern(p[i,j])
+          p[i, j] <- exp(mu + beta[j]*elev[i]) / (1 + exp(mu + beta[j]*elev[i]))
+        }
+
+      }
+
+      #priors
+      mu ~ dnorm(0, taumu)
+      taumu ~ dgamma(0.1, 0.1)
+      taubeta ~ dgamma(0.1, 0.1)
+      mubeta ~ dnorm(0, 1.0E-06)
+
+      for (j in 1:S) {
+        beta[j] ~ dnorm(mubeta, taubeta)
+      }
+
    }
-    
