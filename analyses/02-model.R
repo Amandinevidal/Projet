@@ -1,25 +1,38 @@
-
+#### --------------------------------------------- ####%
+# Date : 02/12/2021
+# Author : Emmanuelle, Bastien, Amandine
+# email : amandine.vidal-hosteng@univ-tlse3.fr
+# Encoding : UTF-8
+# file : 02-model.R
+#
+# Linear model of the simulated presence/absence data
+#### --------------------------------------------- ####%
 
 
 #### Write model ----
 set.seed(442)
 cat("
     model {
-   for (i in 1:N)  {
-     for (j in 1:S){
-        y[i,j]~dbern(p[i,j])
-        p[i,j]<-exp(mu+beta[j]*elev[i])/(1+exp(mu+beta[j]*elev[i]))
-     }
-    }
-    #priors
-    mu~dnorm(0, taumu)
-    taumu~dgamma(0.1,0.1)
-    taubeta~dgamma(0.1,0.1)
-    mubeta~dnorm(0, 1.0E-06)
 
-    for (j in 1:S){
-      beta[j]~dnorm(mubeta,taubeta)
-    }
+      for (i in 1:N)  {
+
+        for (j in 1:S) {
+          y[i, j] ~ dbern(p[i,j])
+          p[i, j] <- exp(mu + beta[j]*elev[i]) / (1 + exp(mu + beta[j]*elev[i]))
+        }
+
+      }
+
+      #priors
+      mu ~ dnorm(0, taumu)
+      taumu ~ dgamma(0.1, 0.1)
+      taubeta ~ dgamma(0.1, 0.1)
+      mubeta ~ dnorm(0, 1.0E-06)
+
+      for (j in 1:S) {
+        beta[j] ~ dnorm(mubeta, taubeta)
+      }
+
    }
     ", file = here::here("analyses", "model.txt"))
 
@@ -29,6 +42,7 @@ N <- nrow(oc)
 S <- ncol(oc)
 y <- oc
 evel <- elev
+
 mydata <- list(elev = elev,
                S = ncol(oc),
                N = nrow(oc),
@@ -69,4 +83,8 @@ duration
 #### Save outputs ----
 
 save(jsample,
+<<<<<<< HEAD
     file=here::here("Outputs", 'model_output.Rdata'))
+=======
+     file=here::here("Outputs", 'model_output.Rdata'))
+>>>>>>> bb8e7114ee754b5c8c9b165ea2c33e5a94597a2f
