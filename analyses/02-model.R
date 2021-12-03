@@ -51,10 +51,7 @@ mydata <- list(elev = elev,
 # list of inits
 
 inits <- list(mu = runif(1,-10,10),
-              beta = rnorm(3, mean = 0.01, sd = 0.01),
-              mubeta = runif(1, -10, 10),
-              taubeta = runif(1, 0, 100),
-              taumu = runif(1, 0, 100))
+              mubeta = rnorm(1, 0, 0.01))
 
 # specify the parameters to be monitored
 parameters <- c("beta[1]", "beta[2]", "beta[3]", "mu", "taumu", "taubeta")
