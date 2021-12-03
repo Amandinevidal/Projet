@@ -64,17 +64,17 @@ server <- function(input,output){
   })
 
   ## print summary table
-    summarytable <- reactive({
-      MCMCvis::MCMCsummary(filedata())|>dplyr::mutate_all(function(x)round(x,1))|>dplyr::select(-7)
-    })
-    output$table <- DT::renderDataTable({
-      if(is.null(input$output1)) {
-        DT::datatable(matrix(0,ncol=3,nrow=3))
-      } else {
+  summarytable <- reactive({
+    MCMCvis::MCMCsummary(filedata())|>dplyr::mutate_all(function(x)round(x,1))|>dplyr::select(-7)
+  })
+  output$table <- DT::renderDataTable({
+    if(is.null(input$output1)) {
+      DT::datatable(matrix(0,ncol=3,nrow=3))
+    } else {
       summarydata <- MCMCvis::MCMCsummary(filedata())|>dplyr::mutate_all(function(x)round(x,1))|>dplyr::select(-7)
-      DT::datatable(as.data.frame(summarydata)) |> DT::formatStyle(ncol(summarydata),target = "row", backgroundColor = DT::styleEqual(which(summarydata$Rhat >= 1.1)[1], "red"))
-      }
-    })
+      DT::datatable(as.data.frame(summarydata)) |> DT::formatStyle('Rhat',target = "row", backgroundColor = DT::styleInterval(c(0,1.09,Inf), c('white','white','red','red')))
+    }
+  })
 
   ## plot (output2) with reactive title to selected parameter (output1)
   i <- reactive({as.character(input$param2)}) # i take one parameter value corresponding to selectInput choices l24 #
