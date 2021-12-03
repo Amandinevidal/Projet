@@ -18,15 +18,15 @@ Please cite this compendium as:
 
 The **analyses** directory contains:
 
-  - [:file\_folder: simu data](/analyses/01-simu_data.R): Simulate data
+-   [:file_folder: simu data](/analyses/01-simu_data.R): Simulate data
     for 3 species.
-  - [:file\_folder: simu data bis](/analyses/01-simu_databis.R):
-    Simulate data for 4 species.
-  - [:file\_folder: model](/analyses/02-model.R): Model simulated data
+-   [:file_folder: simu data bis](/analyses/01-simu_databis.R): Simulate
+    data for 4 species.
+-   [:file_folder: model](/analyses/02-model.R): Model simulated data
     with 3 species.
-  - [:file\_folder: modelbis](/analyses/02-modelbis.R): Model simulated
+-   [:file_folder: modelbis](/analyses/02-modelbis.R): Model simulated
     data with 4 species.
-  - [:file\_folder: shiny](/analyses/shiny.R): Fabulous shiny
+-   [:file_folder: shiny](/analyses/shiny.R): Fabulous shiny
     application.
 
 ## How to run in your browser or download and run locally
