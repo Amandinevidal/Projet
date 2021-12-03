@@ -17,9 +17,11 @@ devtools::load_all()
 
 #### Data simulations ####
 source(here::here("analyses/01-simu_data.R"))
+source(here::here("analyses/01-simu_databis.R"))
 
 #### Model ####
 source(here::here("analyses/02-model.R"))
+source(here::here("analyses/02-modelbis.R"))
 
 #### Shiny ####
 library(shiny)
