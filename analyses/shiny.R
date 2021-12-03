@@ -31,7 +31,7 @@ ui <- fluidPage(titlePanel("Visu Bayes: parameters convergence check"),
                   h2("Trace plot"), # title
                   plotOutput(outputId = "plot",width = "100%", height = "300px"), # trace plot
                   br(), # empty line
-                  h2("Density posterior for each chains"),
+                  h2("Density posterior for each chain"),
                   plotOutput(outputId = "plot2",width = "100%", height = "300px"),
                   br(), # empty line
                   br()# empty line
