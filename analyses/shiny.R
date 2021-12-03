@@ -100,7 +100,7 @@ server <- function(input,output){
     } else {
       results2 <- MCMCvis::MCMCsummary(filedata())
       results2nc <- results2[results2$Rhat>1.1,]
-      if (is.null(rownames(results2[results2$Rhat>1.1,]))) {
+      if (sum(results2[results2$Rhat>1.1,])==0) {
         HTML(
           paste("All parameters reached convergence")
         )

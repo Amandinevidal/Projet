@@ -21,7 +21,9 @@ p_occ1 <- simu_occu(alpha = 0.01, beta = 0.001, elev = elev)$p_occu
 p_occ2 <- simu_occu(alpha = 0.01, beta = -0.001, elev = elev)$p_occu
 p_occ3 <- simu_occu(alpha = 0.01, beta = -0.001, elev = elev)$p_occu
 
+
 #### Create presence/absence matrix ----
+
 oc <- cbind(rbinom(length(p_occ1), 1, p_occ1),
             rbinom(length(p_occ2), 1, p_occ2),
             rbinom(length(p_occ3), 1, p_occ3)

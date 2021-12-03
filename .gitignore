@@ -2,3 +2,7 @@
 .Rhistory
 .RData
 .Ruserdata
+
+
+analyses/model.txt
+Outputs/model_output.Rdata
