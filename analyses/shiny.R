@@ -71,7 +71,7 @@ server <- function(input,output){
     if(is.null(input$output1)) {
       DT::datatable(matrix(0,ncol=3,nrow=3))
     } else {
-      summarydata <- MCMCvis::MCMCsummary(filedata())|>dplyr::mutate_all(function(x)round(x,1))|>dplyr::select(-7)
+      summarydata <- MCMCvis::MCMCsummary(filedata())|>dplyr::mutate_all(function(x)round(x,2))|>dplyr::select(-7)
       DT::datatable(as.data.frame(summarydata)) |> DT::formatStyle('Rhat',target = "row", backgroundColor = DT::styleInterval(c(0,1.09,Inf), c('white','white','red','red')))
     }
   })
