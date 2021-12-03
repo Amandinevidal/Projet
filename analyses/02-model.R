@@ -83,8 +83,6 @@ duration
 #### Save outputs ----
 
 save(jsample,
-<<<<<<< HEAD
-    file=here::here("Outputs", 'model_output.Rdata'))
-=======
      file=here::here("Outputs", 'model_output.Rdata'))
->>>>>>> bb8e7114ee754b5c8c9b165ea2c33e5a94597a2f
+
+
