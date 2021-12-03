@@ -1,2 +1,2 @@
-# Projet
+# VisuBayes
 Projet collaboratif formation Cesab
