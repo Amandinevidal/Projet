@@ -7,5 +7,5 @@
 analyses/model.txt
 analyses/modelbis.txt
 Outputs/model_output.Rdata
-Outputs/modelbis_output.RData
+Outputs/modelbis_output.Rdata
 README.md
