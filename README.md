@@ -10,9 +10,9 @@ visualise chain mixing after Bayesian GLMM analysis.
 
 Please cite this compendium as:
 
-> Authors, (2021). *Compendium of R code and data for VisuBayes:
-> Parameters posterior check*. Accessed 03 déc. 2021. Online at
-> <https://doi.org/xxx/xxx>
+> Emmanuelle Cam, Bastien Mourguiart and Amandine Vidal, (2021).
+> *Compendium of R code and data for VisuBayes: Parameters posterior
+> check*. Accessed 03 déc. 2021. Online at <https://doi.org/xxx/xxx>
 
 ## Contents
 
@@ -41,9 +41,8 @@ You can download the compendium as a zip from from this URL:
 [master.zip](/archive/master.zip). After unzipping: - open the `.Rproj`
 file in RStudio - run `devtools::install()` to ensure you have the
 packages this analysis depends on (also listed in the
-[DESCRIPTION](/DESCRIPTION) file). - finally, open
-`analysis/paper/paper.Rmd` and knit to produce the `paper.docx`, or run
-`rmarkdown::render("analysis/paper/paper.Rmd")` in the R console
+[DESCRIPTION](/DESCRIPTION) file). - finally, open `analyses/shiny.R`
+and source it to view the shinyapp.
 
 ### Licenses
 
